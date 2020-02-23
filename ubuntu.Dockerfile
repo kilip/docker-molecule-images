@@ -3,7 +3,6 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV VERSION=${VERSION}
 
 COPY bin/initctl_faker.sh initctl_faker
 
@@ -32,7 +31,7 @@ RUN set -ex; \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    if [[ ${VERSION} == "16.04"]]; then \
+    if [ "$VERSION" = "16.04" ]; then \
       apt-get install -y --no-install-recommends \
         python-software-properties \
         python-setuptoools \
