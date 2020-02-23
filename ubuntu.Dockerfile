@@ -1,6 +1,8 @@
 ARG VERSION
 FROM ubuntu:${VERSION}
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 COPY bin/initctl_faker.sh initctl_faker
 
 RUN set -ex; \
@@ -36,7 +38,7 @@ RUN set -ex; \
         && python get-pip.py ; \
     else \
         apt-get install -y --no-install-recommends python3 python3-pip python3-setuptools \
-        && pip3 install bdist_wheel ansible ; \
+        && pip3 install ansible;\
     fi \
     ;\
     chmod +x initctl_faker \
