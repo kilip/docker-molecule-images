@@ -4,16 +4,7 @@ FROM ubuntu:${VERSION}
 COPY bin/initctl_faker.sh initctl_faker
 
 RUN apt-get update \
-        && apt-get dist-upgrade -y \
-    ;\
-    \
-    apt-get install --fix-missing --no-install-recommends -y \
-        python3 \
-        python3-pip \
-        python3-apt \
-    ;\
-    \
-    apt-get --no-install-recommends install -y \
+    && apt-get install --fix-missing --no-install-recommends -y \
         apt-transport-https \
         apt-utils \
         sudo \
@@ -35,17 +26,17 @@ RUN apt-get update \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    if["${VERSION}" == "16.04"]; then \
+    if[ "${VERSION}" == "16.04"]; then \
       apt-get install -y --no-install-recommends \
         python-software-properties \
         python-setuptoools \
       && wget https://bootstrap.pypa.io/get-pip.py \
         && python get-pip.py ; \
     else \
-      pip3 install setuptools \
+        apt-get install -y --no-install-recommends python3 python3-pip python3-setuptools \
         && pip3 install ansible ; \
     fi \
-    \
+    ;\
     chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
       && mkdir -p /etc/ansible \
