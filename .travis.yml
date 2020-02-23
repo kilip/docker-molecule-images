@@ -14,17 +14,24 @@ env:
   - DIST: ubuntu
     VERSION: 18.04
     TAG: latest
+  - DIST: debian
+    VERSION: 9
+    TAG: latest
+  - DIST: debian
+    VERSION: 10
+    TAG: latest
 
 deploy:
   provider: script
   skip_cleanup: true
   script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push ${IMAGE}
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ${IMAGE}
   on:
     branch: master
 
 before_install:
-- export IMAGE=${DOCKER_USERNAME}/molecule-${DIST}${VERSION}:${TAG}
+- export IMAGE=${DOCKER_USERNAME}/${DIST}${VERSION}:${TAG}
 # Upgrade Docker.
 - sudo apt-get update
 - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
