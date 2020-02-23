@@ -1,10 +1,6 @@
 ARG VERSION
 FROM ubuntu:${VERSION}
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV APT_MIRRORS=archive.ubuntu.com
-ENV APT_SECURITY=security.ubuntu.com
-
 COPY bin/initctl_faker.sh initctl_faker
 
 RUN apt-get update \
@@ -39,15 +35,15 @@ RUN apt-get update \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    if[[ "${VERSION}" == "16.04" ]]; then \
+    if["${VERSION}" == "16.04"]; then \
       apt-get install -y --no-install-recommends \
         python-software-properties \
         python-setuptoools \
       && wget https://bootstrap.pypa.io/get-pip.py \
-        && python get-pip.py; \
+        && python get-pip.py ; \
     else \
       pip3 install setuptools \
-        && pip3 install ansible; \
+        && pip3 install ansible ; \
     fi \
     \
     chmod +x initctl_faker \
