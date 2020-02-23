@@ -48,7 +48,8 @@ RUN apt-get update \
     else \
       pip3 install setuptools \
         && pip3 install ansible \
-    ;fi\
+    fi \
+    ;\
     \
     chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
