@@ -3,12 +3,14 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV DIST_VERSION=${VERSION}
 
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/ubuntu-install.sh ubuntu-install
 
+RUN echo $VERSION
+
 RUN set -ex; \
-    export VERSION=${VERSION} \
     apt-get update \
     && apt-get install --fix-missing --no-install-recommends -y \
         libterm-readline-gnu-perl \
