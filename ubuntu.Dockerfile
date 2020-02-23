@@ -3,10 +3,13 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ARG VERSION
+ARG TAG
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV USE_MIRROR=no
 
 COPY bin/initctl_faker.sh initctl_faker
+COPY bin/mirror.sh /bin/mirror.sh
 
 RUN set -ex; \
     \
@@ -51,10 +54,11 @@ RUN set -ex; \
         pip3 install ansible; \
       fi \
     ;\
-    chmod +x initctl_faker \
-      && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
-      && mkdir -p /etc/ansible \
-      && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+      chmod +x initctl_faker \
+        && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+        && mkdir -p /etc/ansible \
+        && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+      chmod +x /bin/mirror.sh \
     ;\
     \
     rm -f /lib/systemd/system/systemd*udev* \
@@ -66,4 +70,5 @@ RUN set -ex; \
 
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
+
 CMD ["/lib/systemd/systemd"]
