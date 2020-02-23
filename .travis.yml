@@ -1,6 +1,9 @@
 ---
 services: docker
 
+cache:
+- apt
+
 env:
   matrix:
   - VERSION: ubuntu1804
