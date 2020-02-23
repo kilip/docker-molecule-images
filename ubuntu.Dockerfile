@@ -39,7 +39,7 @@ RUN apt-get update \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    if [ "${VERSION}" == "16.04" ]; then \
+    if[[ "${VERSION}" == "16.04" ]]; then \
       apt-get install -y --no-install-recommends \
         python-software-properties \
         python-setuptoools \
@@ -49,7 +49,6 @@ RUN apt-get update \
       pip3 install setuptools \
         && pip3 install ansible; \
     fi \
-    ;\
     \
     chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
@@ -64,18 +63,9 @@ RUN apt-get update \
       && apt-get clean \
     ;\
     \
-    rm /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic main restricted" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic-updates main restricted" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic universe" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic-updates universe" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_SECURITY}/ubuntu/ bionic-security main restricted" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_SECURITY}/ubuntu/ bionic-security universe" >> /etc/apt/sources.list \
-    ;\
-    \
     find /usr/share/doc ! -type d -exec rm '{}' \
     find /usr/share/man ! -type d -exec rm '{}'
-  
+
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
 CMD ["/lib/systemd/systemd"]
