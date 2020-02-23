@@ -39,8 +39,9 @@ RUN set -ex; \
         apt-get install -y --no-install-recommends \
           python-software-properties \
           python-setuptools;\
-        wget https://bootstrap.pypa.io/get-pip.py \
-          python get-pip.py; \
+        wget https://bootstrap.pypa.io/get-pip.py; \
+        python get-pip.py; \
+        pip install ansible; \
       else \
         apt-get install -y --no-install-recommends \
             python3 \
