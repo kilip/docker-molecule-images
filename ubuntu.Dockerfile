@@ -58,8 +58,8 @@ RUN set -ex; \
       && apt-get clean \
     ;\
     \
-    find /usr/share/doc ! -type d -exec rm '{}' \
-    && find /usr/share/man ! -type d -exec rm '{}'
+    find /usr/share/doc ! -type d -exec rm {} \
+    && find /usr/share/man ! -type d -exec rm {}
 
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
