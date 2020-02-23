@@ -13,6 +13,14 @@ env:
     VERSION: 18.04
     TAG: latest
 
+deploy:
+  provider: script
+  script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ${IMAGE}
+  on:
+    branch: master
+
 before_install:
   # Upgrade Docker.
   - sudo apt-get update
