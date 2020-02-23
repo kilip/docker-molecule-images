@@ -1,0 +1,24 @@
+---
+services: docker
+
+env:
+  matrix:
+  - VERSION: ubuntu1804
+    TAG: latest
+
+before_install:
+  # Upgrade Docker.
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+
+script:
+  - export IMAGE=${DOCKER_USERNAME}/${VERSIOn}:${TAG}
+
+  # Test building Dockerfile.
+  - docker build -t ${IMAGE} . -f ${VERSION}.Dockerfile
+
+  # Test running the container.
+  - docker run --name test-container -d --privileged ${IMAGE}
+
+  # Verify Ansible is available in the container.
+  - docker exec --tty test-container env TERM=xterm ansible --version
