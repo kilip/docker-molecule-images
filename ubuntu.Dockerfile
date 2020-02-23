@@ -9,32 +9,46 @@ COPY bin/initctl_faker.sh initctl_faker
 COPY bin/ubuntu-install.sh ubuntu-install
 
 RUN set -ex; \
-    apt-get update \
-    && apt-get install --fix-missing --no-install-recommends -y \
-        libterm-readline-gnu-perl \
-        apt-transport-https \
-        apt-utils \
-        sudo \
-        bash \
-        ca-certificates \
-        iproute2 \
-        software-properties-common \
-        dirmngr \
-        rsyslog \
-        systemd \
-        systemd-cron \
-        sudo \
-        iproute2 \
-        locales \
-        wget \
-        curl \
+    \
+      apt-get update; \
+      apt-get install --fix-missing --no-install-recommends -y \
+          libterm-readline-gnu-perl \
+          apt-transport-https \
+          apt-utils \
+          sudo \
+          bash \
+          ca-certificates \
+          iproute2 \
+          software-properties-common \
+          dirmngr \
+          rsyslog \
+          systemd \
+          systemd-cron \
+          sudo \
+          iproute2 \
+          locales \
+          wget \
+          curl \
+      ;\
+    \
+      sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf; \
+      locale-gen en_US.UTF-8 \
     ;\
     \
-      sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
-          && locale-gen en_US.UTF-8 \
-    ;\
-      chmod +x ubuntu-install; \
-      VERSION=${VERSION} /ubuntu-install; \
+      if [ "$VERSION" = "16.04" ]; then \
+        apt-get install -y --no-install-recommends \
+          python-software-properties \
+          python-setuptoools;\
+        wget https://bootstrap.pypa.io/get-pip.py \
+          python get-pip.py; \
+      else \
+        apt-get install -y --no-install-recommends \
+            python3 \
+            python3-pip \
+            python3-wheel \
+            python3-setuptools;\
+        pip3 install ansible; \
+      fi \
     \
     chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
