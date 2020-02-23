@@ -14,6 +14,9 @@ env:
   - DIST: ubuntu
     VERSION: 18.04
     TAG: latest
+  - DIST: debian
+    VERSION: 9
+    TAG: latest
 
 deploy:
   provider: script

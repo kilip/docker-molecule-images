@@ -18,7 +18,7 @@ RUN set -eux; \
        python-pip python-dev python-setuptools python-wheel \
       && rm -rf /var/lib/apt/lists/* \
       && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
-      && apt-get clean
+      && apt-get clean \
     ;\
     \
       wget https://bootstrap.pypa.io/get-pip.py \
@@ -28,14 +28,14 @@ RUN set -eux; \
     \
       chmod +x initctl_faker \
       && rm -fr /sbin/initctl \
-      && ln -s /initctl_faker /sbin/initctl
+      && ln -s /initctl_faker /sbin/initctl \
     ;\
     \
       mkdir -p /etc/ansible \
       echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
     ;\
     \
-      rm -f /lib/systemd/system/multi-user.target.wants/getty.target
+      rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
