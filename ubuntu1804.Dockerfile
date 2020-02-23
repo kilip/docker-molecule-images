@@ -4,7 +4,9 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV APT_MIRRORS=archive.ubuntu.com
 ENV APT_SECURITY=security.ubuntu.com
 
-RUN set -eux; \
+COPY bin/initctl_faker.sh bin/initctl_faker
+
+RUN \
     rm /etc/apt/sources.list \
         && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic main restricted" >> /etc/apt/sources.list \
         && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic-updates main restricted" >> /etc/apt/sources.list \
@@ -39,7 +41,21 @@ RUN set -eux; \
     \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
-        && pip3 install ansible
+        && pip3 install ansible \
+    ;\
+    \
+    chmod +x initctl_faker \
+      && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+      && mkdir -p /etc/ansible \
+      && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+    ;\
+    \
+    rm -f /lib/systemd/system/systemd*udev* \
+      && rm -f /lib/systemd/system/getty.target \
+    ;\
+    apt-get autoremove --purge \
+      && apt-get clean
 
-RUN apt-get autoremove --purge \
-    && apt-get clean
+VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
+
+CMD ["/lib/systemd/systemd"]
