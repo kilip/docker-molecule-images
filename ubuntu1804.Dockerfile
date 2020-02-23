@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV APT_MIRRORS=archive.ubuntu.com
 ENV APT_SECURITY=security.ubuntu.com
 
-COPY bin/initctl_faker.sh bin/initctl_faker
+COPY bin/initctl_faker.sh initctl_faker
 
 RUN \
     rm /etc/apt/sources.list \
