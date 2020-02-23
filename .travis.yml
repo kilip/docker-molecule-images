@@ -1,10 +1,27 @@
 ---
+dist: bionic
+
 services: docker
+
+cache:
+- apt
 
 env:
   matrix:
-  - VERSION: ubuntu1804
+  - DIST: ubuntu
+    VERSION: 16.04
     TAG: latest
+  - DIST: ubuntu
+    VERSION: 18.04
+    TAG: latest
+
+deploy:
+  provider: script
+  script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ${IMAGE}
+  on:
+    branch: master
 
 before_install:
   # Upgrade Docker.
@@ -12,13 +29,13 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 script:
-  - export IMAGE=${DOCKER_USERNAME}/${VERSIOn}:${TAG}
+- export IMAGE=${DOCKER_USERNAME}/${DIST}${VERSION}:${TAG}
+- export DOCKER_FILE=${dist}
+# Test building Dockerfile.
+- docker build --build-arg VERSION=${VERSION} -t ${IMAGE} . -f ${DIST}.Dockerfile
 
-  # Test building Dockerfile.
-  - docker build -t ${IMAGE} . -f ${VERSION}.Dockerfile
+# Test running the container.
+- docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro ${IMAGE}
 
-  # Test running the container.
-  - docker run --name test-container -d --privileged ${IMAGE}
-
-  # Verify Ansible is available in the container.
-  - docker exec --tty test-container env TERM=xterm ansible --version
+# Verify Ansible is available in the container.
+- docker exec --tty test-container env TERM=xterm ansible --version
