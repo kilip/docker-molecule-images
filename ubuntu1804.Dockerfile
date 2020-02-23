@@ -57,5 +57,4 @@ RUN \
       && apt-get clean
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
-
 CMD ["/lib/systemd/systemd"]
