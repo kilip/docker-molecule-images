@@ -7,6 +7,9 @@ cache:
 env:
   matrix:
   - DIST: ubuntu
+    VERSION: 16.04
+    TAG: latest
+  - DIST: ubuntu
     VERSION: 18.04
     TAG: latest
 
