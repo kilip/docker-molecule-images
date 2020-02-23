@@ -13,9 +13,17 @@ RUN set -eux; \
     \
       apt-get update \
       && apt-get install -y --no-install-recommends \
-       sudo systemd systemd-sysv \
-       build-essential wget libffi-dev libssl-dev \
-       python-pip python-dev python-setuptools python-wheel \
+          sudo \
+          systemd \
+          systemd-sysv \
+          build-essential \
+          wget \
+          libffi-dev \
+          libssl-dev \
+          python-pip \
+          python-dev \
+          python-setuptools\
+          python-wheel \
       && rm -rf /var/lib/apt/lists/* \
       && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
       && apt-get clean \
@@ -32,7 +40,7 @@ RUN set -eux; \
     ;\
     \
       mkdir -p /etc/ansible \
-      echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+      && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
     ;\
     \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
