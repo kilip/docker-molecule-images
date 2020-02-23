@@ -37,6 +37,7 @@ RUN set -eux; \
           python3-dev \
           python3-setuptools \
           python3-wheel \
+          python3-pip \
         ;\
         pip3 install ansible cryptography; \
       fi \
@@ -52,6 +53,8 @@ RUN set -eux; \
     ;\
     \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
+      && apt-get autoremove --purge \
+      && apt-get clean \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
