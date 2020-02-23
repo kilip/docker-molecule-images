@@ -3,6 +3,7 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV VERSION=${VERSION}
 
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/ubuntu-install.sh ubuntu-install
