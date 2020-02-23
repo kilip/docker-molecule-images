@@ -71,6 +71,4 @@ RUN set -ex; \
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
 
-ENTRYPOINT [ "/bin/mirror.sh" ]
-
 CMD ["/lib/systemd/systemd"]
