@@ -1,0 +1,43 @@
+ARG VERSION
+FROM debian:${VERSION}
+LABEL maintainer="Anthonius Munthi"
+
+ARG VERSION
+ENV DEBIAN_FRONTEND noninteractive
+ENV pip_packages "ansible cryptography"
+
+COPY bin/initctl_faker.sh initctl_faker
+
+# Install dependencies.
+RUN set -eux; \
+    \
+      apt-get update \
+      && apt-get install -y --no-install-recommends \
+       sudo systemd systemd-sysv \
+       build-essential wget libffi-dev libssl-dev \
+       python-pip python-dev python-setuptools python-wheel \
+      && rm -rf /var/lib/apt/lists/* \
+      && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
+      && apt-get clean
+    ;\
+    \
+      wget https://bootstrap.pypa.io/get-pip.py \
+      && python get-pip.py \
+      && pip install $pip_packages \
+    ;\
+    \
+      chmod +x initctl_faker \
+      && rm -fr /sbin/initctl \
+      && ln -s /initctl_faker /sbin/initctl
+    ;\
+    \
+      mkdir -p /etc/ansible \
+      echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+    ;\
+    \
+      rm -f /lib/systemd/system/multi-user.target.wants/getty.target
+    ;
+
+VOLUME ["/sys/fs/cgroup"]
+
+CMD ["/lib/systemd/systemd"]
