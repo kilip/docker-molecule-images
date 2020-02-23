@@ -33,7 +33,7 @@ RUN set -ex; \
         && locale-gen en_US.UTF-8 \
     ;\
       chmod +x ubuntu-install \
-      && ubuntu-install.sh \
+      && /ubuntu-install.sh \
     ;\
     chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
