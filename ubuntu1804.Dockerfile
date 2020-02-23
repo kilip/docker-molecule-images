@@ -1,4 +1,4 @@
-FROM ubuntu:18.04-latest
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APT_MIRRORS=archive.ubuntu.com
@@ -12,7 +12,6 @@ RUN set -eux; \
         && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic-updates universe" >> /etc/apt/sources.list \
         && echo "deb http://${APT_SECURITY}/ubuntu/ bionic-security main restricted" >> /etc/apt/sources.list \
         && echo "deb http://${APT_SECURITY}/ubuntu/ bionic-security universe" >> /etc/apt/sources.list \
-        && cp -v ./deb/*.* /var/cache/apt/archives \
         && apt-get update \
         && apt-get dist-upgrade -y \
     ;\
