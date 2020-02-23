@@ -43,7 +43,7 @@ RUN \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    pip3 install setup-tools \
+    pip3 install setuptools \
         && pip3 install ansible \
     ;\
     \
