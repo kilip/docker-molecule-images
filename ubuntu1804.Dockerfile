@@ -25,7 +25,7 @@ RUN set -eux; \
     apt-get --no-install-recommends install -y \
         apt-transport-https \
         apt-utils \
-        sudo \ 
+        sudo \
         bash \
         ca-certificates \
         iproute2 \
@@ -44,4 +44,3 @@ RUN set -eux; \
 
 RUN apt-get autoremove --purge \
     && apt-get clean
-
