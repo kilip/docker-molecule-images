@@ -3,7 +3,7 @@ FROM ubuntu:${VERSION}
 
 COPY bin/initctl_faker.sh initctl_faker
 
-RUN set -eux; \
+RUN set -ex; \
     apt-get update \
     && apt-get install --fix-missing --no-install-recommends -y \
         libterm-readline-gnu-perl \
