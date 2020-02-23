@@ -44,10 +44,10 @@ RUN apt-get update \
         python-software-properties \
         python-setuptoools \
       && wget https://bootstrap.pypa.io/get-pip.py \
-        && python get-pip.py \
+        && python get-pip.py; \
     else \
       pip3 install setuptools \
-        && pip3 install ansible \
+        && pip3 install ansible; \
     fi \
     ;\
     \
