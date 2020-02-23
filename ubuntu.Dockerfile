@@ -3,7 +3,8 @@ FROM ubuntu:${VERSION}
 
 COPY bin/initctl_faker.sh initctl_faker
 
-RUN apt-get update \
+RUN set -eux; \
+    apt-get update \
     && apt-get install --fix-missing --no-install-recommends -y \
         libterm-readline-gnu-perl \
         apt-transport-https \
@@ -27,7 +28,7 @@ RUN apt-get update \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    if [[ "${VERSION}" == "16.04" ]]; then \
+    if ["${VERSION}" == "16.04"]; then \
       apt-get install -y --no-install-recommends \
         python-software-properties \
         python-setuptoools \
