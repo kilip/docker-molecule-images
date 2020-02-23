@@ -4,7 +4,6 @@ LABEL maintainer="Anthonius Munthi"
 
 ARG VERSION
 ENV DEBIAN_FRONTEND noninteractive
-ENV pip_packages "ansible cryptography"
 
 COPY bin/initctl_faker.sh initctl_faker
 
@@ -20,18 +19,28 @@ RUN set -eux; \
           wget \
           libffi-dev \
           libssl-dev \
-          python-pip \
-          python-dev \
-          python-setuptools\
-          python-wheel \
       && rm -rf /var/lib/apt/lists/* \
       && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
       && apt-get clean \
     ;\
     \
-      wget https://bootstrap.pypa.io/get-pip.py \
-      && python get-pip.py \
-      && pip install $pip_packages \
+      wget https://bootstrap.pypa.io/get-pip.py; \
+      if [ "$VERSION" = '9' ]; then \
+        apt get install -y --no-install-recommends \
+          python-dev \
+          python-setuptools\
+          python-wheel \
+        ;\
+        && python get-pip.py \
+        && pip install ansible cryptography;\
+      else \
+        apt get install -y --no-install-recommends \
+          python3-dev \
+          python3-setuptools \
+          python3-wheel \
+        ;\
+        pip3 install ansible cryptography; \
+      fi \
     ;\
     \
       chmod +x initctl_faker \

@@ -17,6 +17,9 @@ env:
   - DIST: debian
     VERSION: 9
     TAG: latest
+  - DIST: debian
+    VERSION: 10
+    TAG: latest
 
 deploy:
   provider: script
