@@ -3,10 +3,10 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ARG VERSION
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 COPY bin/initctl_faker.sh initctl_faker
-COPY bin/ubuntu-install.sh ubuntu-install
 
 RUN set -ex; \
     \
@@ -49,7 +49,7 @@ RUN set -ex; \
             python3-setuptools;\
         pip3 install ansible; \
       fi \
-    \
+    ;\
     chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
       && mkdir -p /etc/ansible \
