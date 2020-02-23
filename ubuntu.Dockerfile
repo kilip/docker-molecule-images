@@ -5,6 +5,7 @@ COPY bin/initctl_faker.sh initctl_faker
 
 RUN apt-get update \
     && apt-get install --fix-missing --no-install-recommends -y \
+        libterm-readline-gnu-perl \
         apt-transport-https \
         apt-utils \
         sudo \
@@ -26,7 +27,7 @@ RUN apt-get update \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
         && locale-gen en_US.UTF-8 \
     ;\
-    if [ "${VERSION}" == "16.04"]; then \
+    if [[ "${VERSION}" == "16.04" ]]; then \
       apt-get install -y --no-install-recommends \
         python-software-properties \
         python-setuptoools \
@@ -51,7 +52,7 @@ RUN apt-get update \
     ;\
     \
     find /usr/share/doc ! -type d -exec rm '{}' \
-    find /usr/share/man ! -type d -exec rm '{}'
+    && find /usr/share/man ! -type d -exec rm '{}'
 
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
