@@ -70,7 +70,11 @@ RUN apt-get update \
       && echo "deb http://${APT_MIRRORS}/ubuntu/ bionic-updates universe" >> /etc/apt/sources.list \
       && echo "deb http://${APT_SECURITY}/ubuntu/ bionic-security main restricted" >> /etc/apt/sources.list \
       && echo "deb http://${APT_SECURITY}/ubuntu/ bionic-security universe" >> /etc/apt/sources.list \
-    ;
+    ;\
+    \
+    find /usr/share/doc ! -type d -exec rm '{}' \
+    find /usr/share/man ! -type d -exec rm '{}'
+  
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
 CMD ["/lib/systemd/systemd"]
