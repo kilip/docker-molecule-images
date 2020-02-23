@@ -28,9 +28,9 @@ RUN set -eux; \
       wget https://bootstrap.pypa.io/get-pip.py; \
       if [ "$VERSION" = '9' ]; then \
         apt-get install -y --no-install-recommends \
-          python-dev \
-          python-setuptools\
-          python-wheel \
+          python3-dev \
+          python3-setuptools\
+          python3-wheel \
         ;\
         python get-pip.py \
           && pip install ansible cryptography;\
