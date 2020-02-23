@@ -20,9 +20,6 @@ RUN set -eux; \
           libffi-dev \
           libssl-dev \
           ca-certificates \
-      && rm -rf /var/lib/apt/lists/* \
-      && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
-      && apt-get clean \
     ;\
     \
       wget https://bootstrap.pypa.io/get-pip.py; \
