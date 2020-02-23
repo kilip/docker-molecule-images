@@ -8,7 +8,7 @@ COPY bin/initctl_faker.sh initctl_faker
 COPY bin/ubuntu-install.sh ubuntu-install
 
 RUN set -ex; \
-    export VERSION=${VERSION}
+    export VERSION=${VERSION} \
     apt-get update \
     && apt-get install --fix-missing --no-install-recommends -y \
         libterm-readline-gnu-perl \
