@@ -6,7 +6,8 @@ cache:
 
 env:
   matrix:
-  - VERSION: ubuntu1804
+  - DISTRO: ubuntu
+    VERSION: 18.04
     TAG: latest
 
 before_install:
