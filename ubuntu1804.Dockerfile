@@ -37,6 +37,7 @@ RUN \
         systemd-cron \
         sudo \
         iproute2 \
+        locales \
     ;\
     \
     sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf \
