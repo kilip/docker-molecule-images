@@ -12,7 +12,7 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 script:
-  - export IMAGE=${DOCKER_USERNAME}/${VERSIOn}:${TAG}
+  - export IMAGE=${DOCKER_USERNAME}/${VERSION}:${TAG}
 
   # Test building Dockerfile.
   - docker build -t ${IMAGE} . -f ${VERSION}.Dockerfile
