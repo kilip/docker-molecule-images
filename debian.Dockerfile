@@ -31,8 +31,8 @@ RUN set -eux; \
           python-setuptools\
           python-wheel \
         ;\
-        && python get-pip.py \
-        && pip install ansible cryptography;\
+        python get-pip.py \
+          && pip install ansible cryptography;\
       else \
         apt get install -y --no-install-recommends \
           python3-dev \
