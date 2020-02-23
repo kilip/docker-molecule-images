@@ -38,7 +38,7 @@ RUN set -ex; \
       if [ "$VERSION" = "16.04" ]; then \
         apt-get install -y --no-install-recommends \
           python-software-properties \
-          python-setuptoools;\
+          python-setuptools;\
         wget https://bootstrap.pypa.io/get-pip.py \
           python get-pip.py; \
       else \
