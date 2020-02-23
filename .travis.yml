@@ -9,7 +9,6 @@ env:
   - DIST: ubuntu
     VERSION: 18.04
     TAG: latest
-    DOCKER_FILE: ubuntu.Dockerfile
 
 before_install:
   # Upgrade Docker.
@@ -20,7 +19,7 @@ script:
 - export IMAGE=${DOCKER_USERNAME}/${DIST}${VERSION}:${TAG}
 - export DOCKER_FILE=${dist}
 # Test building Dockerfile.
-- docker build --build-arg VERSION=${VERSION} -t ${IMAGE} . -f $DOCKER_FILE
+- docker build --build-arg VERSION=${VERSION} -t ${IMAGE} . -f ${DIST}.Dockerfile
 
 # Test running the container.
 - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro ${IMAGE}
