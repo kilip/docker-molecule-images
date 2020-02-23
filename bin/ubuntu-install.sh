@@ -21,7 +21,7 @@ install_bionic(){
   pip3 install ansible;
 }
 
-if [[ "${VERSION}" = "16.04" ]]; then
+if [[ ${VERSION} = "16.04" ]]; then
   install_xenial
 else
   install_bionic
