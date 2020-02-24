@@ -37,6 +37,8 @@ RUN set -eux; \
           && rm -rf /var/cache/dnf/*; \
         ln -s /usr/bin/python3 /usr/bin/python; \
       fi \
+    ;\
+    \
       sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
       && ln -s /usr/bin/pip3 /usr/bin/pip \
     ;
