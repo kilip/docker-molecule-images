@@ -4,13 +4,8 @@ FROM ubuntu:${VERSION}
 
 ARG VERSION
 
-<<<<<<< HEAD:ubuntu.dockerfile
-ENV DEBIAN_FRONTEND=noninteractive
-ENV USE_MIRROR=no
-=======
 ENV container docker
 ENV DEBIAN_FRONTEND noninteractive
->>>>>>> develop:dist/ubuntu/Dockerfile
 
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/mirror.sh /bin/mirror.sh
@@ -64,12 +59,6 @@ RUN set -ex; \
     ;\
       chmod +x initctl_faker \
         && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
-<<<<<<< HEAD:ubuntu.Dockerfile
-        && mkdir -p /etc/ansible \
-        && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
-      chmod +x /bin/mirror.sh \
-=======
->>>>>>> master:ubuntu.dockerfile
     ;\
     \
       rm -f /lib/systemd/system/systemd*udev* \
