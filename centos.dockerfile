@@ -32,8 +32,10 @@ RUN set -eux; \
       && pip3 install ansible \
     ;\
     \
-      dnf clean all \
-      && rm -rf /var/cache/dnf/* \
+      if [ "$VERSION" = 8 ]; then \
+        dnf clean all \
+        && rm -rf /var/cache/dnf/*; \
+      fi \
       && sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
       && mkdir -p /etc/ansible \
       && echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts \
