@@ -1,9 +1,6 @@
 #!make
 
-ifneq ("$(wildcard .env)","" )
-	include .env
-	export $(shell sed 's/=.*//' .env)
-endif
+-include .env
 
 .DEFAULT_GOAL	:= build
 MOLECULE_DISTRO := $(DIST):$(VERSION)

@@ -6,12 +6,13 @@ ARG VERSION
 
 ENV container docker
 ENV DEBIAN_FRONTEND noninteractive
+ENV USE_MIRROR no
 
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/mirror.sh /bin/mirror.sh
 
-RUN set -ex; \
-    \
+RUN \
+      set -ex; \
       apt-get update; \
       apt-get install --fix-missing --no-install-recommends -y \
           libterm-readline-gnu-perl \
