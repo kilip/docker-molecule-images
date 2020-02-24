@@ -13,9 +13,11 @@ env:
   - DIST: centos
     VERSION: 7
   - DIST: ubuntu
-    VERSION: 16.04
+    VERSION: 20.04
   - DIST: ubuntu
     VERSION: 18.04
+  - DIST: ubuntu
+    VERSION: 16.04
   - DIST: debian
     VERSION: 9
   - DIST: debian
