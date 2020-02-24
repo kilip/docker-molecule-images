@@ -1,2 +1,8 @@
 ---
-
+# test add apt repository
+- name: apt ~> add certbot repository
+  apt_repository:
+    repo: ppa:certbot/certbot
+    state: present
+    name: certbot
+  when: ansible_distribution_major_version == 18 or ansible_distribution_major_version == 16
