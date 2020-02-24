@@ -26,7 +26,7 @@ env:
 
 deploy:
   provider: script
-  skip_cleanup: true
+  cleanup: false
   script:
   - make push
   on:
@@ -46,4 +46,4 @@ before_script:
 
 script:
 # Test building Dockerfile.
-- make test
+- make molecule-test

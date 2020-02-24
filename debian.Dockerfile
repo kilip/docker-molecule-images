@@ -12,7 +12,6 @@ RUN set -eux; \
     \
       apt-get update \
       && apt-get install -y --no-install-recommends \
-          software-properties-common \
           sudo \
           systemd \
           systemd-sysv \
@@ -21,33 +20,26 @@ RUN set -eux; \
           libffi-dev \
           libssl-dev \
           ca-certificates \
-          gpg-agent \
-          gpg \
-          dirmngr \
     ;\
     \
+      wget https://bootstrap.pypa.io/get-pip.py; \
       if [ "$VERSION" = '9' ]; then \
+        cat /etc/apt/sources.list; \
         apt-get install -y --no-install-recommends \
-          python \
-          python-apt \
           python-dev \
           python-setuptools\
           python-wheel \
-          python-pip \
         ;\
+        python get-pip.py \
+          && pip install ansible cryptography;\
       else \
         apt-get install -y --no-install-recommends \
-          python3 \
-          python3-apt \
           python3-dev \
           python3-setuptools \
           python3-wheel \
           python3-pip \
         ;\
-        update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
-        update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
-        update-alternatives --config python; \
-        update-alternatives --config pip; \
+        pip3 install ansible cryptography; \
       fi \
     ;\
     \
@@ -56,12 +48,15 @@ RUN set -eux; \
       && ln -s /initctl_faker /sbin/initctl \
     ;\
     \
+      mkdir -p /etc/ansible \
+      && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
+    ;\
+    \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
       && apt-get autoremove --purge \
       && apt-get clean \
-      && mkdir -p /root/.ansible/tmp \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
 
-ENTRYPOINT [ "/lib/systemd/systemd" ]
+CMD ["/lib/systemd/systemd"]

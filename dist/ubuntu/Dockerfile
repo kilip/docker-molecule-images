@@ -6,11 +6,13 @@ ARG VERSION
 
 ENV container docker
 ENV DEBIAN_FRONTEND noninteractive
+ENV USE_MIRROR no
 
 COPY bin/initctl_faker.sh initctl_faker
+COPY bin/ubuntu-entrypoint.sh /bin/entrypoint.sh
 
-RUN set -ex; \
-    \
+RUN \
+      set -ex; \
       apt-get update; \
       apt-get install --fix-missing --no-install-recommends -y \
           libterm-readline-gnu-perl \
@@ -57,7 +59,8 @@ RUN set -ex; \
       fi \
     ;\
       chmod +x initctl_faker \
-        && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+      && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+      && chmod +x /bin/entrypoint.sh \
     ;\
     \
       rm -f /lib/systemd/system/systemd*udev* \
@@ -70,4 +73,4 @@ RUN set -ex; \
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
 
-CMD ["/lib/systemd/systemd"]
+ENTRYPOINT [ "/bin/entrypoint.sh" ]

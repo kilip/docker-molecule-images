@@ -1,7 +1,5 @@
 """Role testing files using testinfra."""
 
-import re
-
 def test_python_version(host):
     """Assert that python installed"""
     py    = host.run('python --version')

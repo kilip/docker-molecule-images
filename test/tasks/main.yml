@@ -1,2 +1,18 @@
 ---
-# tasks file for test
+- include: "task-{{ ansible_os_family }}.yml"
+
+- name: package ~> install nginx
+  package:
+    name: nginx
+    state: present
+
+- name: package ~> install certbot
+  package:
+    name: certbot
+    state: present
+
+- name: service ~> nginx started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: yes
