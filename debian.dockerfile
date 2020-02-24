@@ -37,6 +37,7 @@ RUN set -eux; \
         ;\
       else \
         apt-get install -y --no-install-recommends \
+          python3 \
           python3-apt \
           python3-dev \
           python3-setuptools \

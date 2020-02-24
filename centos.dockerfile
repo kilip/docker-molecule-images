@@ -33,9 +33,9 @@ RUN set -eux; \
     \
       if [ "$VERSION" = 8 ]; then \
         dnf clean all \
-        && rm -rf /var/cache/dnf/*; \
-        && ln -s /usr/bin/python3 /usr/bin/python \
-        && ln -s /usr/bin/pip3 /usr/bin/pip \
+          && rm -rf /var/cache/dnf/*; \
+        ln -s /usr/bin/python3 /usr/bin/python \
+          && ln -s /usr/bin/pip3 /usr/bin/pip; \
       fi \
       && sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
     ;
