@@ -67,6 +67,6 @@ RUN set -eux; \
       && mkdir -p /root/.ansible/tmp \
     ;
 
-VOLUME ["/sys/fs/cgroup"]
+VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 
 ENTRYPOINT [ "entrypoint" ]
