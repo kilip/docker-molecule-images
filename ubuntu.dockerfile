@@ -32,7 +32,6 @@ RUN set -ex; \
           locales \
           wget \
           curl \
-          gpg-agent \
       ;\
     \
       sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf; \
@@ -41,6 +40,7 @@ RUN set -ex; \
     \
       if [ "$VERSION" = "16.04" ]; then \
         apt-get install -y --no-install-recommends \
+          gnupg-agent \
           python-software-properties \
           python-setuptools;\
         wget https://bootstrap.pypa.io/get-pip.py; \
@@ -48,6 +48,7 @@ RUN set -ex; \
         pip install ansible; \
       else \
         apt-get install -y --no-install-recommends \
+            gpg-agent \
             python3 \
             python3-pip \
             python3-wheel \

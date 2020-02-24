@@ -32,7 +32,9 @@ RUN set -eux; \
       && pip3 install ansible \
     ;\
     \
-      sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
+      dnf clean all \
+      && rm -rf /var/cache/dnf/* \
+      && sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
       && mkdir -p /etc/ansible \
       && echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts \
       && mkdir -p /root/.ansible/tmp \
