@@ -28,16 +28,17 @@ RUN set -eux; \
             hostname \
             python3 \
             python3-pip \
+      && ln -s /usr/bin/pip /usr/bin/pip \
       && yum clean all \
     ;\
     \
       if [ "$VERSION" = 8 ]; then \
         dnf clean all \
           && rm -rf /var/cache/dnf/*; \
-        ln -s /usr/bin/python3 /usr/bin/python \
-          && ln -s /usr/bin/pip3 /usr/bin/pip; \
+        ln -s /usr/bin/python3 /usr/bin/python; \
       fi \
-      && sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
+      sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
+      && ln -s /usr/bin/pip3 /usr/bin/pip \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
