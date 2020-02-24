@@ -39,8 +39,7 @@ RUN set -eux; \
       fi \
     ;\
     \
-      sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
-      && ln -s /usr/bin/pip3 /usr/bin/pip \
+      sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
