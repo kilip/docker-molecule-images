@@ -11,15 +11,8 @@ ENV USE_MIRROR=no
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/mirror.sh /bin/mirror.sh
 
-RUN set -ex; \
-    \
-      apt-get update; \
-      apt-get install --fix-missing --no-install-recommends -y \
-          libterm-readline-gnu-perl \
-          apt-transport-https \
-          apt-utils \
-          sudo \
-          bash \
+RUN set -ex; \&& mkdir -p /root/.ansible/tmp \
+      && touch /root/.ansible/tmp/.keep \
           ca-certificates \
           iproute2 \
           software-properties-common \
@@ -32,6 +25,7 @@ RUN set -ex; \
           locales \
           wget \
           curl \
+          gpg-agent \
       ;\
     \
       sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf; \
@@ -61,11 +55,13 @@ RUN set -ex; \
       chmod +x /bin/mirror.sh \
     ;\
     \
-    rm -f /lib/systemd/system/systemd*udev* \
+      rm -f /lib/systemd/system/systemd*udev* \
       && rm -f /lib/systemd/system/getty.target \
     ;\
-    apt-get autoremove --purge \
+      apt-get autoremove --purge \
       && apt-get clean \
+      && mkdir -p /root/.ansible/tmp \
+      && touch /root/.ansible/tmp/.keep \
     ;
 
 
