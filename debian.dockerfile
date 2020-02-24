@@ -23,6 +23,7 @@ RUN set -eux; \
           ca-certificates \
           gpg-agent \
           gpg \
+          dirmngr \
     ;\
     \
       wget https://bootstrap.pypa.io/get-pip.py; \
