@@ -19,9 +19,9 @@ env:
   - DIST: ubuntu
     VERSION: 16.04
   - DIST: debian
-    VERSION: 9
-  - DIST: debian
     VERSION: 10
+  - DIST: debian
+    VERSION: 9
 
 deploy:
   provider: script
