@@ -1,10 +1,11 @@
 ---
 dist: bionic
-
+language: python
 services: docker
 
 cache:
 - apt
+- pip
 
 env:
   matrix:
@@ -27,7 +28,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push ${IMAGE}
+  - make push
   on:
     branch: master
 
@@ -37,13 +38,12 @@ before_install:
 - sudo apt-get update
 - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
+install:
+- pip install molecule docker ansible-lint testinfra
+
+before_script:
+- make
+
 script:
 # Test building Dockerfile.
-- docker build --build-arg VERSION=${VERSION} -t ${IMAGE} . -f ${DIST}.dockerfile
-
-# Test running the container.
-- docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro ${IMAGE}
-
-# Verify Ansible is available in the container.
-- docker exec --tty test-container env TERM=xterm python --version
-- docker exec --tty test-container env TERM=xterm pip --version
+- make test

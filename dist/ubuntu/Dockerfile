@@ -3,10 +3,14 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ARG VERSION
-ARG TAG
 
+<<<<<<< HEAD:ubuntu.dockerfile
 ENV DEBIAN_FRONTEND=noninteractive
 ENV USE_MIRROR=no
+=======
+ENV container docker
+ENV DEBIAN_FRONTEND noninteractive
+>>>>>>> develop:dist/ubuntu/Dockerfile
 
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/mirror.sh /bin/mirror.sh
