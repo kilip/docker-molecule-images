@@ -9,6 +9,9 @@ cache:
 env:
   matrix:
   - DIST: centos
+    VERSION: 8
+    TAG: latest
+  - DIST: centos
     VERSION: 7
     TAG: latest
   - DIST: ubuntu

@@ -22,6 +22,8 @@ RUN set -eux; \
       && yum -y install \
             sudo \
             which \
+            hostname \
+            python3 \
             python3-pip \
       && yum clean all \
       && pip3 install ansible \
