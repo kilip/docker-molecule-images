@@ -7,15 +7,15 @@ which have a `systemd` enabled in the container.
 [![Build Status](https://travis-ci.com/kilip/docker-molecule-images.svg?branch=master)](https://travis-ci.com/kilip/docker-molecule-images)
 
 Available images
-| Distro | Version | Python | Ansible |
-| ------ | ------- | ------ | ------- |
-| Ubuntu | 20.04 (Focal)  | 3.7 | 2.9 |
-| Ubuntu | 18.04 (Bionic) | 3.6 | 2.9 |
-| Ubuntu | 16.04 (Xenial) | 2.7 | 2.9 |
-| Debian | 10 (Buster)    | 3.6 | 2.9 |
-| Debian | 9 (Stretch)    | 2.7 | 2.9 |
-| CentOS | 8              | 3.6 | 2.9 |
-| CentOS | 7              | 2.7 | 2.9 |
+| Distro | Version | Python |
+| ------ | ------- | ------ |
+| Ubuntu | 20.04 (Focal)  | 3.7 |
+| Ubuntu | 18.04 (Bionic) | 3.6 |
+| Ubuntu | 16.04 (Xenial) | 2.7 |
+| Debian | 10 (Buster)    | 3.6 |
+| Debian | 9 (Stretch)    | 2.7 |
+| CentOS | 8              | 3.6 |
+| CentOS | 7              | 2.7 |
 
 Molecule sample use
 ====

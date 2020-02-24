@@ -45,7 +45,6 @@ RUN set -eux; \
           python3-wheel \
           python3-pip \
         ;\
-        pip3 install ansible cryptography; \
       fi \
     ;\
     \
@@ -54,15 +53,9 @@ RUN set -eux; \
       && ln -s /initctl_faker /sbin/initctl \
     ;\
     \
-      mkdir -p /etc/ansible \
-      && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
-    ;\
-    \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
       && apt-get autoremove --purge \
       && apt-get clean \
-      && mkdir -p /root/.ansible/tmp \
-      && touch /root/.ansible/tmp/.keep \
     ;
 
 VOLUME ["/sys/fs/cgroup"]

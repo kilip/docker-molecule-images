@@ -29,7 +29,6 @@ RUN set -eux; \
             python3 \
             python3-pip \
       && yum clean all \
-      && pip3 install ansible \
     ;\
     \
       if [ "$VERSION" = 8 ]; then \
@@ -37,10 +36,6 @@ RUN set -eux; \
         && rm -rf /var/cache/dnf/*; \
       fi \
       && sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
-      && mkdir -p /etc/ansible \
-      && echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts \
-      && mkdir -p /root/.ansible/tmp \
-      && touch /root/.ansible/tmp/.keep \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
