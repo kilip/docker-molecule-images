@@ -3,9 +3,9 @@ ARG VERSION
 FROM ubuntu:${VERSION}
 
 ARG VERSION
-ARG TAG
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV container docker
+ENV DEBIAN_FRONTEND noninteractive
 
 COPY bin/initctl_faker.sh initctl_faker
 
