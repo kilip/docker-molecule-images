@@ -3,4 +3,4 @@
   apt_repository:
     repo: ppa:certbot/certbot
     state: present
-    name: certbot
+    filename: certbot
