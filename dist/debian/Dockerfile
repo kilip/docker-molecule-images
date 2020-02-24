@@ -59,6 +59,7 @@ RUN set -eux; \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
       && apt-get autoremove --purge \
       && apt-get clean \
+      && mkdir -p /root/.ansible/tmp \
     ;
 
 VOLUME ["/sys/fs/cgroup"]

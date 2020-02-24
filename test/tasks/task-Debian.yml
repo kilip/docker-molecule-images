@@ -1,6 +1,2 @@
 ---
-- name: apt ~> add certbot repository
-  apt_repository:
-    repo: ppa:certbot/certbot
-    state: present
-    filename: certbot
+
