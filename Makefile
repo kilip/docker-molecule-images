@@ -32,7 +32,7 @@ destroy:
 	cd test; \
 	molecule destroy;
 
-test:
+molecule-test:
 	cd test; \
 	molecule test;
 

@@ -9,7 +9,10 @@ platforms:
   - name: instance
     image: ${TARGET}
     pre_build_image: true
-
+    privileged: true
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
 

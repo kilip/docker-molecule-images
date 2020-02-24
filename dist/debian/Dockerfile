@@ -63,4 +63,4 @@ RUN set -eux; \
 
 VOLUME ["/sys/fs/cgroup"]
 
-CMD ["/lib/systemd/systemd"]
+ENTRYPOINT [ "/lib/systemd/systemd" ]

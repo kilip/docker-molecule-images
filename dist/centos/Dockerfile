@@ -23,6 +23,8 @@ RUN \
           deltarpm \
           epel-release \
           initscripts \
+          which \
+          hostname \
       && yum -y update; \
       if [ $(command -v dnf) ]; then \
         dnf makecache \
