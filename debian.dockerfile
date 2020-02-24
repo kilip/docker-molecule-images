@@ -45,6 +45,10 @@ RUN set -eux; \
           python3-wheel \
           python3-pip \
         ;\
+        update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
+        update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
+        update-alternatives --config python; \
+        update-alternatives --config pip; \
       fi \
     ;\
     \

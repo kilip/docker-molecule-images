@@ -50,13 +50,17 @@ RUN set -ex; \
             python3-pip \
             python3-wheel \
             python3-setuptools;\
+        update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
+        update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
+        update-alternatives --config python; \
+        update-alternatives --config pip; \
       fi \
     ;\
       chmod +x initctl_faker \
         && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
     ;\
     \
-    rm -f /lib/systemd/system/systemd*udev* \
+      rm -f /lib/systemd/system/systemd*udev* \
       && rm -f /lib/systemd/system/getty.target \
     ;\
       apt-get autoremove --purge \
