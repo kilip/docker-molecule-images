@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV USE_MIRROR no
 
 COPY bin/initctl_faker.sh initctl_faker
-COPY bin/mirror.sh /bin/mirror.sh
+COPY bin/ubuntu-entrypoint.sh /bin/entrypoint.sh
 
 RUN \
       set -ex; \
@@ -59,7 +59,8 @@ RUN \
       fi \
     ;\
       chmod +x initctl_faker \
-        && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+      && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+      && chmod +x /bin/entrypoint.sh \
     ;\
     \
       rm -f /lib/systemd/system/systemd*udev* \
@@ -72,4 +73,4 @@ RUN \
 
 VOLUME [ "/sys/fs/cgroup", "/tmp", "/run"]
 
-CMD ["/lib/systemd/systemd"]
+ENTRYPOINT [ "/bin/entrypoint.sh" ]

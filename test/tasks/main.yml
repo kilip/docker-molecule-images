@@ -1,2 +1,2 @@
 ---
-# tasks file for test
+- include: "task-{{ ansible_distribution }}.yml"
