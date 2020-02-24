@@ -35,6 +35,8 @@ RUN set -eux; \
       sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers  \
       && mkdir -p /etc/ansible \
       && echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts \
+      && mkdir -p /root/.ansible/tmp \
+      && touch /root/.ansible/tmp/.keep \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
