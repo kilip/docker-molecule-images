@@ -20,6 +20,7 @@ RUN set -eux; \
           libffi-dev \
           libssl-dev \
           ca-certificates \
+          gpg-agent \
     ;\
     \
       wget https://bootstrap.pypa.io/get-pip.py; \
@@ -55,6 +56,8 @@ RUN set -eux; \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
       && apt-get autoremove --purge \
       && apt-get clean \
+      && mkdir -p /root/.ansible/tmp \
+      && touch /root/.ansible/tmp/.keep \
     ;
 
 VOLUME ["/sys/fs/cgroup"]
