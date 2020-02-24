@@ -40,31 +40,38 @@ RUN set -ex; \
     \
       if [ "$VERSION" = "16.04" ]; then \
         apt-get install -y --no-install-recommends \
-          python-software-properties \
-          python-setuptools;\
-        wget https://bootstrap.pypa.io/get-pip.py; \
-        python get-pip.py; \
-        pip install ansible; \
+          gnupg-agent \
+          python \
+          python-wheel \
+          python-pip \
+          python-setuptools; \
       else \
         apt-get install -y --no-install-recommends \
+            gpg-agent \
             python3 \
             python3-pip \
             python3-wheel \
             python3-setuptools;\
-        pip3 install ansible; \
+        update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
+        update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
+        update-alternatives --config python; \
+        update-alternatives --config pip; \
       fi \
     ;\
       chmod +x initctl_faker \
         && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
+<<<<<<< HEAD:ubuntu.Dockerfile
         && mkdir -p /etc/ansible \
         && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts \
       chmod +x /bin/mirror.sh \
+=======
+>>>>>>> master:ubuntu.dockerfile
     ;\
     \
-    rm -f /lib/systemd/system/systemd*udev* \
+      rm -f /lib/systemd/system/systemd*udev* \
       && rm -f /lib/systemd/system/getty.target \
     ;\
-    apt-get autoremove --purge \
+      apt-get autoremove --purge \
       && apt-get clean \
     ;
 

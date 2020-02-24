@@ -8,11 +8,15 @@ cache:
 
 env:
   matrix:
+  - DIST: centos
+    VERSION: 8
+  - DIST: centos
+    VERSION: 7
   - DIST: ubuntu
-    VERSION: 16.04
-    TAG: latest
+    VERSION: 20.04
   - DIST: ubuntu
     VERSION: 18.04
+<<<<<<< HEAD
     TAG: latest
   - DIST: debian
     VERSION: 9
@@ -20,28 +24,40 @@ env:
   - DIST: debian
     VERSION: 10
     TAG: latest
+=======
+  - DIST: ubuntu
+    VERSION: 16.04
+  - DIST: debian
+    VERSION: 10
+  - DIST: debian
+    VERSION: 9
+>>>>>>> master
 
 deploy:
   provider: script
   skip_cleanup: true
   script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push ${IMAGE}
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push ${IMAGE}
   on:
     branch: master
 
 before_install:
+<<<<<<< HEAD
 - export IMAGE=${DOCKER_USERNAME}/${DIST}${VERSION}:${TAG}
+=======
+- export IMAGE=${DOCKER_USERNAME}/molecule-${DIST}:${VERSION}
+>>>>>>> master
 # Upgrade Docker.
 - sudo apt-get update
 - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 script:
 # Test building Dockerfile.
-- docker build --build-arg VERSION=${VERSION} -t ${IMAGE} . -f ${DIST}.Dockerfile
+- docker build --build-arg VERSION=${VERSION} -t ${IMAGE} . -f ${DIST}.dockerfile
 
 # Test running the container.
 - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro ${IMAGE}
 
 # Verify Ansible is available in the container.
-- docker exec --tty test-container env TERM=xterm ansible --version
+- docker exec --tty test-container env TERM=xterm python --version
+- docker exec --tty test-container env TERM=xterm pip --version
