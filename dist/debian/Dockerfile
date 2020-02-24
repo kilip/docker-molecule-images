@@ -4,8 +4,11 @@ LABEL maintainer="Anthonius Munthi"
 
 ARG VERSION
 ENV DEBIAN_FRONTEND noninteractive
+ENV USE_MIRROR no
+ENV COUNTRY none
 
 COPY bin/initctl_faker.sh initctl_faker
+COPY bin/debian-entrypoint.sh entrypoint
 
 # Install dependencies.
 RUN set -eux; \
@@ -24,6 +27,7 @@ RUN set -eux; \
           gpg-agent \
           gpg \
           dirmngr \
+          netselect-apt \
     ;\
     \
       if [ "$VERSION" = '9' ]; then \
@@ -54,6 +58,7 @@ RUN set -eux; \
       chmod +x initctl_faker \
       && rm -fr /sbin/initctl \
       && ln -s /initctl_faker /sbin/initctl \
+      && chmod +x entrypoint \
     ;\
     \
       rm -f /lib/systemd/system/multi-user.target.wants/getty.target \
@@ -64,4 +69,4 @@ RUN set -eux; \
 
 VOLUME ["/sys/fs/cgroup"]
 
-ENTRYPOINT [ "/lib/systemd/systemd" ]
+ENTRYPOINT [ "entrypoint" ]
