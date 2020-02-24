@@ -16,22 +16,12 @@ env:
     VERSION: 20.04
   - DIST: ubuntu
     VERSION: 18.04
-<<<<<<< HEAD
-    TAG: latest
-  - DIST: debian
-    VERSION: 9
-    TAG: latest
-  - DIST: debian
-    VERSION: 10
-    TAG: latest
-=======
   - DIST: ubuntu
     VERSION: 16.04
   - DIST: debian
     VERSION: 10
   - DIST: debian
     VERSION: 9
->>>>>>> master
 
 deploy:
   provider: script
@@ -42,11 +32,7 @@ deploy:
     branch: master
 
 before_install:
-<<<<<<< HEAD
-- export IMAGE=${DOCKER_USERNAME}/${DIST}${VERSION}:${TAG}
-=======
 - export IMAGE=${DOCKER_USERNAME}/molecule-${DIST}:${VERSION}
->>>>>>> master
 # Upgrade Docker.
 - sudo apt-get update
 - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
