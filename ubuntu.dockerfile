@@ -41,7 +41,6 @@ RUN set -ex; \
       if [ "$VERSION" = "16.04" ]; then \
         apt-get install -y --no-install-recommends \
           gnupg-agent \
-          python-software-properties \
           python-setuptools;\
         wget https://bootstrap.pypa.io/get-pip.py; \
         python get-pip.py; \

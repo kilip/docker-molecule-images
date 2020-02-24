@@ -29,7 +29,7 @@ RUN set -eux; \
       if [ "$VERSION" = '9' ]; then \
         cat /etc/apt/sources.list; \
         apt-get install -y --no-install-recommends \
-          python-software-properties \
+          python-apt \
           python-dev \
           python-setuptools\
           python-wheel \
@@ -38,6 +38,7 @@ RUN set -eux; \
           && pip install ansible cryptography;\
       else \
         apt-get install -y --no-install-recommends \
+          python3-apt \
           python3-dev \
           python3-setuptools \
           python3-wheel \
