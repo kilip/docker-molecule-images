@@ -4,9 +4,12 @@ Molecule Docker Images
 This repository contains a docker container to be used in molecule,
 which have a `systemd` enabled in the container.
 
+[![Build Status](https://travis-ci.com/kilip/docker-molecule-images.svg?branch=master)](https://travis-ci.com/kilip/docker-molecule-images)
+
 Available images
 | Distro | Version | Python | Ansible |
 | ------ | ------- | ------ | ------- |
+| Ubuntu | 20.04 (Focal)  | 3.7 | 2.9 |
 | Ubuntu | 18.04 (Bionic) | 3.6 | 2.9 |
 | Ubuntu | 16.04 (Xenial) | 2.7 | 2.9 |
 | Debian | 10 (Buster)    | 3.6 | 2.9 |
