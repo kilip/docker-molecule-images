@@ -12,6 +12,7 @@ RUN set -eux; \
     \
       apt-get update \
       && apt-get install -y --no-install-recommends \
+          software-properties-common \
           sudo \
           systemd \
           systemd-sysv \
@@ -21,12 +22,14 @@ RUN set -eux; \
           libssl-dev \
           ca-certificates \
           gpg-agent \
+          gpg \
     ;\
     \
       wget https://bootstrap.pypa.io/get-pip.py; \
       if [ "$VERSION" = '9' ]; then \
         cat /etc/apt/sources.list; \
         apt-get install -y --no-install-recommends \
+          python-software-properties \
           python-dev \
           python-setuptools\
           python-wheel \
