@@ -28,10 +28,12 @@ RUN set -eux; \
     \
       if [ "$VERSION" = '9' ]; then \
         apt-get install -y --no-install-recommends \
+          python \
           python-apt \
           python-dev \
           python-setuptools\
           python-wheel \
+          python-pip \
         ;\
       else \
         apt-get install -y --no-install-recommends \
