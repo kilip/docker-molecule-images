@@ -64,6 +64,7 @@ RUN \
     ;\
       apt-get autoremove --purge \
       && apt-get clean \
+      && mkdir -p /root/.ansible/tmp \
     ;
 
 

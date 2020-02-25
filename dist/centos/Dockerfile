@@ -54,6 +54,7 @@ RUN \
     ;\
       sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers \
       && sed -i 's/plugins=0/plugins=1/g' /etc/yum.conf \
+      && mkdir -p /root/.ansible/tmp \
     ;
     # END RUN
 
