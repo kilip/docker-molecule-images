@@ -65,6 +65,11 @@ RUN set -eux; \
       && mkdir -p /root/.ansible/tmp \
     ;
 
+COPY bin/debian-entrypoint.sh /bin/entrypoint
+
+RUN chmod +x /bin/entrypoint
+
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 
-ENTRYPOINT [ "entrypoint" ]
+ENTRYPOINT [ "/bin/entrypoint" ]
+#CMD ["/lib/systemd/systemd"]
