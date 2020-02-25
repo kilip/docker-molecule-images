@@ -55,6 +55,7 @@ RUN \
         && update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 \
         && update-alternatives --config python \
         && update-alternatives --config pip \
+        && pip install --upgrade pip \
     ;\
       chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
@@ -66,6 +67,7 @@ RUN \
     ;\
       apt-get autoremove --purge \
       && apt-get clean \
+      && mkdir -p /root/.ansible/tmp \
     ;
 
 
