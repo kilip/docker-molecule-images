@@ -32,6 +32,10 @@ RUN \
           locales \
           wget \
           curl \
+          python3 \
+          python3-pip \
+          python3-wheel \
+          python3-setuptools\
       ;\
     \
       sed -i "s/^\($ModLoad imklog\)/#\1/" /etc/rsyslog.conf; \
@@ -40,18 +44,10 @@ RUN \
     \
       if [ "$VERSION" = "16.04" ]; then \
         apt-get install -y --no-install-recommends \
-          gnupg-agent \
-          python \
-          python-wheel \
-          python-pip \
-          python-setuptools; \
+          gnupg-agent; \
       else \
         apt-get install -y --no-install-recommends \
-            gpg-agent \
-            python3 \
-            python3-pip \
-            python3-wheel \
-            python3-setuptools;\
+            gpg-agent; \
         update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
         update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
         update-alternatives --config python; \
