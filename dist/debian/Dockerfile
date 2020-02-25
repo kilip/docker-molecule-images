@@ -8,12 +8,19 @@ ENV USE_MIRROR no
 ENV COUNTRY none
 
 COPY bin/initctl_faker.sh initctl_faker
+COPY bin/debian-entrypoint.sh /bin/entrypoint
 
 # Install dependencies.
 RUN set -eux; \
     \
       apt-get update \
       && apt-get install -y --no-install-recommends \
+          python3 \
+          python3-apt \
+          python3-dev \
+          python3-setuptools \
+          python3-wheel \
+          python3-pip \
           software-properties-common \
           sudo \
           systemd \
@@ -29,31 +36,11 @@ RUN set -eux; \
           netselect-apt \
     ;\
     \
-      if [ "$VERSION" = '9' ]; then \
-        apt-get install -y --no-install-recommends \
-          python \
-          python-apt \
-          python-dev \
-          python-setuptools\
-          python-wheel \
-          python-pip \
-        ;\
-      else \
-        apt-get install -y --no-install-recommends \
-          python3 \
-          python3-apt \
-          python3-dev \
-          python3-setuptools \
-          python3-wheel \
-          python3-pip \
-        ;\
-        update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
-        update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
-        update-alternatives --config python; \
-        update-alternatives --config pip; \
-      fi \
+        update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
+        && update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 \
+        && update-alternatives --config python \
+        && update-alternatives --config pip \
     ;\
-    \
       chmod +x initctl_faker \
       && rm -fr /sbin/initctl \
       && ln -s /initctl_faker /sbin/initctl \
@@ -63,13 +50,9 @@ RUN set -eux; \
       && apt-get autoremove --purge \
       && apt-get clean \
       && mkdir -p /root/.ansible/tmp \
+      && chmod +x /bin/entrypoint \
     ;
 
-COPY bin/debian-entrypoint.sh /bin/entrypoint
-
-RUN chmod +x /bin/entrypoint
-
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
-
 ENTRYPOINT [ "/bin/entrypoint" ]
-#CMD ["/lib/systemd/systemd"]
+CMD ["/lib/systemd/systemd"]
