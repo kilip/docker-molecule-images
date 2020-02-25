@@ -48,12 +48,14 @@ RUN \
       else \
         apt-get install -y --no-install-recommends \
             gpg-agent; \
+      fi \
+    ;\
+    \
         update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
         update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1; \
         update-alternatives --config python; \
         update-alternatives --config pip; \
-      fi \
-    ;\
+    \
       chmod +x initctl_faker \
       && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl \
       && chmod +x /bin/entrypoint.sh \
@@ -64,7 +66,6 @@ RUN \
     ;\
       apt-get autoremove --purge \
       && apt-get clean \
-      && mkdir -p /root/.ansible/tmp \
     ;
 
 
