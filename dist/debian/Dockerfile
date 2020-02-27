@@ -33,6 +33,7 @@ RUN set -eux; \
           gpg-agent \
           gpg \
           dirmngr \
+          apt-transport-https \
           netselect-apt \
     ;\
     \
