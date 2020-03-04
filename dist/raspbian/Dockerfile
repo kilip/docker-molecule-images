@@ -58,6 +58,8 @@ RUN set -eux; \
       && chmod +x /bin/entrypoint \
     ;
 
+RUN [ "cross-build-end" ]
+
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 ENTRYPOINT [ "/bin/entrypoint" ]
 CMD ["/lib/systemd/systemd"]
