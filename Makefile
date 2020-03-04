@@ -3,14 +3,14 @@
 -include .env
 
 .DEFAULT_GOAL	:= build
-MOLECULE_DISTRO := $(DIST):$(VERSION)
-TARGET 			:= kilip/molecule-$(DIST):$(VERSION)
+MOLECULE_DISTRO := $(MOLECULE_DIST):$(MOLECULE_VERSION)
+TARGET 			:= kilip/molecule-$(MOLECULE_DIST):$(MOLECULE_VERSION)
 
 export TARGET
 export MOLECULE_DISTRO
 
 build:
-	docker build --build-arg VERSION=$(VERSION) -t $(TARGET) -f dist/$(DIST)/Dockerfile .
+	docker build --build-arg VERSION=$(MOLECULE_VERSION) -t $(TARGET) -f dist/$(MOLECULE_DIST)/Dockerfile .
 
 create:
 	cd test; \

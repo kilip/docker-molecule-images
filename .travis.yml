@@ -13,8 +13,8 @@ cache:
 
 jobs:
   include:
-  - DIST: raspbian
-    VERSION: buster
+  - MOLECULE_DIST: raspbian
+    MOLECULE_VERSION: buster
     arch: arch64
 
 deploy:
