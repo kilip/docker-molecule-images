@@ -11,6 +11,8 @@ env:
   matrix:
   - DIST: raspbian
     VERSION: buster
+    os: linux
+    arch: arm32
   - DIST: centos
     VERSION: 8
   - DIST: centos
