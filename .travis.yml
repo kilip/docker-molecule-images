@@ -29,7 +29,7 @@ before_install:
 - export IMAGE=${DOCKER_USERNAME}/molecule-${DIST}:${VERSION}
 # Upgrade Docker.
 - sudo apt-get update
-- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+- sudo apt-get -y install docker-ce
 
 install:
 - pip install molecule docker ansible-lint testinfra
