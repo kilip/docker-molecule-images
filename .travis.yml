@@ -13,7 +13,7 @@ cache:
 
 jobs:
   include:
-  - arch: arch64
+  - arch: arm64
     env: MOLECULE_DIST=raspbian MOLECULE_VERSION=buster
 
 deploy:
