@@ -3,10 +3,6 @@ os: linux
 
 dist: bionic
 
-arch:
-- amd64
-- arch32
-
 language: python
 
 services: docker
@@ -15,10 +11,12 @@ cache:
 - apt
 - pip
 
-matrix:
+jobs:
   include:
   - DIST: raspbian
     VERSION: buster
+    arch: arch64
+
 deploy:
   provider: script
   cleanup: false
