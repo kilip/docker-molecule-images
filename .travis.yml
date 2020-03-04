@@ -5,7 +5,7 @@ dist: bionic
 
 arch:
 - amd64
-- arm32
+- arch32
 
 language: python
 
@@ -19,21 +19,6 @@ matrix:
   include:
   - DIST: raspbian
     VERSION: buster
-    arch: arm32
-  - DIST: centos
-    VERSION: 8
-  - DIST: centos
-    VERSION: 7
-  - DIST: ubuntu
-    VERSION: 20.04
-  - DIST: ubuntu
-    VERSION: 18.04
-  - DIST: ubuntu
-    VERSION: 16.04
-  - DIST: debian
-    VERSION: 10
-  - DIST: debian
-    VERSION: 9
 deploy:
   provider: script
   cleanup: false
