@@ -9,6 +9,8 @@ cache:
 
 env:
   matrix:
+  - DIST: raspbian
+    VERSION: buster
   - DIST: centos
     VERSION: 8
   - DIST: centos
@@ -23,9 +25,6 @@ env:
     VERSION: 10
   - DIST: debian
     VERSION: 9
-  - DIST: raspbian
-    VERSION: buster
-
 deploy:
   provider: script
   cleanup: false
