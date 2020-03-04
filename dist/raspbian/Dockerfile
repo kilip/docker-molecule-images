@@ -1,8 +1,6 @@
 ARG VERSION
 
-FROM balenalib/raspberrypi3-debian:${VERSION}
-
-RUN [ "cross-build-start" ]
+FROM balenalib/raspberrypi3-debian:${VERSION}-run
 
 LABEL maintainer="Anthonius Munthi"
 
@@ -13,6 +11,8 @@ ENV COUNTRY none
 
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/debian-entrypoint.sh /bin/entrypoint
+
+RUN [ "cross-build-start" ]
 
 # Install dependencies.
 RUN set -eux; \
@@ -58,9 +58,8 @@ RUN set -eux; \
       && chmod +x /bin/entrypoint \
     ;
 
+RUN [ "cross-build-end" ]
+
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 ENTRYPOINT [ "/bin/entrypoint" ]
 CMD ["/lib/systemd/systemd"]
-
-
-RUN [ "cross-build-end" ]
