@@ -23,6 +23,8 @@ env:
     VERSION: 10
   - DIST: debian
     VERSION: 9
+  - DIST: raspbian
+    VERSION: buster
 
 deploy:
   provider: script
