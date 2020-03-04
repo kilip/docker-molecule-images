@@ -19,6 +19,8 @@ RUN set -eux; \
     \
       apt-get update \
       && apt-get install -y --no-install-recommends \
+          bash \
+          openssh \
           python3 \
           python3-apt \
           python3-dev \
