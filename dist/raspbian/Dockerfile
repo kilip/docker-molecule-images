@@ -12,7 +12,7 @@ ENV COUNTRY none
 COPY bin/initctl_faker.sh initctl_faker
 COPY bin/debian-entrypoint.sh /bin/entrypoint
 
-RUN [ "cross-build-start" ]
+#RUN [ "cross-build-start" ]
 
 # Install dependencies.
 RUN set -eux; \
@@ -58,7 +58,7 @@ RUN set -eux; \
       && chmod +x /bin/entrypoint \
     ;
 
-RUN [ "cross-build-end" ]
+#RUN [ "cross-build-end" ]
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 ENTRYPOINT [ "/bin/entrypoint" ]
