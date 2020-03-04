@@ -1,6 +1,6 @@
 ARG VERSION
 
-FROM balenalib/raspberrypi3-debian:${VERSION}-run
+FROM balenalib/raspberrypi3:buster-run
 
 LABEL maintainer="Anthonius Munthi"
 
@@ -57,8 +57,6 @@ RUN set -eux; \
       && mkdir -p /root/.ansible/tmp \
       && chmod +x /bin/entrypoint \
     ;
-
-RUN [ "cross-build-end" ]
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 ENTRYPOINT [ "/bin/entrypoint" ]

@@ -47,4 +47,4 @@ before_script:
 
 script:
 # Test building Dockerfile.
-- make create
+- make molecule-test
